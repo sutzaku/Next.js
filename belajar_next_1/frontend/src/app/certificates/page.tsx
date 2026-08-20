@@ -66,7 +66,14 @@ export default function CertificatePage() {
                       </div>
                       <div>
                         <span className="font-medium text-gray-400">ID Kredensial: </span>
-                        {cert.credentialId}
+                        <a
+                          href={cert.verificationUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-indigo-400 hover:text-indigo-300 hover:underline font-mono font-medium transition-colors"
+                        >
+                          {cert.credentialId}
+                        </a>
                       </div>
                     </div>
                   </div>

@@ -1,5 +1,74 @@
 
+"use client";
+
+import { useState } from "react";
+
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<{
+    loading: boolean;
+    success: boolean | null;
+    message: string;
+  }>({
+    loading: false,
+    success: null,
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus({
+        loading: false,
+        success: false,
+        message: "Nama, email, dan pesan wajib diisi!",
+      });
+      return;
+    }
+
+    try {
+      setStatus({ loading: true, success: null, message: "" });
+      const res = await fetch("http://localhost:5000/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setStatus({
+          loading: false,
+          success: true,
+          message: "Pesan berhasil dikirim dan disimpan!",
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus({
+          loading: false,
+          success: false,
+          message: data.message || "Gagal mengirim pesan.",
+        });
+      }
+    } catch (err: any) {
+      setStatus({
+        loading: false,
+        success: false,
+        message: "Gagal terhubung ke server backend.",
+      });
+    }
+  };
+
   return (
     <section className="py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,7 +89,7 @@ export default function ContactPage() {
           {/* Ini form kontak */}
           <div className="p-6 sm:p-8 rounded-2xl bg-gray-900/50 border border-gray-800/50">
             <h2 className="text-xl font-bold text-white mb-6">Kirim Pesan</h2>
-            <form className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label
                   htmlFor="name"
@@ -32,6 +101,8 @@ export default function ContactPage() {
                   type="text"
                   id="name"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Masukkan nama anda"
                   className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 transition-all duration-300"
                 />
@@ -48,6 +119,8 @@ export default function ContactPage() {
                   type="email"
                   id="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="contoh@email.com"
                   className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 transition-all duration-300"
                 />
@@ -64,6 +137,8 @@ export default function ContactPage() {
                   type="text"
                   id="subject"
                   name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="Tentang apa?"
                   className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 transition-all duration-300"
                 />
@@ -80,23 +155,33 @@ export default function ContactPage() {
                   id="message"
                   name="message"
                   rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Tulis pesan anda di sini..."
                   className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 transition-all duration-300"
                 />
               </div>
 
+              {status.message && (
+                <div
+                  className={`p-4 rounded-xl text-sm font-medium ${
+                    status.success
+                      ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                      : "bg-red-500/10 text-red-400 border border-red-500/20"
+                  }`}
+                >
+                  {status.message}
+                </div>
+              )}
+
               <button
-                type="button"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-semibold hover:from-indigo-400 hover:to-violet-400 transition-all duration-300"
+                type="submit"
+                disabled={status.loading}
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-semibold hover:from-indigo-400 hover:to-violet-400 transition-all duration-300 disabled:opacity-50"
               >
-                Kirim Pesan
+                {status.loading ? "Mengirim..." : "Kirim Pesan"}
               </button>
             </form>
-
-            <p className="text-gray-500 text-xs mt-4 text-center">
-              * Form ini belum fungsional. Akan dikoneksikan ke backend di
-              pertemuan selanjutnya.
-            </p>
           </div>
 
           {/* Info kontak */}
@@ -106,7 +191,7 @@ export default function ContactPage() {
                 {
                   icon: "📧",
                   title: "Email",
-                  value: "afiqri@example.com",
+                  value: "afiqriramadhan12@gmail.com",
                   description:
                     "Kirim email kapan saja, saya akan membalasnya secepatnya.",
                 },
@@ -114,12 +199,12 @@ export default function ContactPage() {
                   icon: "📱",
                   title: "Telepon",
                   value: "+62 822 9269 1375",
-                  description: "Tersedia di jam sekolah (08.00 - 15.00 WIB).",
+                  description: "Tersedia di jam sekolah (08.00 - 15.00 WITA).",
                 },
                 {
                   icon: "📍",
                   title: "Lokasi",
-                  value: "Indonesia",
+                  value: "Makassar, Indonesia",
                   description: "Bisa bekerja sama secara remote maupun offline.",
                 },
               ].map((item) => (
@@ -148,14 +233,20 @@ export default function ContactPage() {
             {/* Social Media */}
             <div className="p-6 rounded-2xl bg-gray-900/50 border border-gray-800/50">
               <h3 className="text-white font-semibold mb-4">Social Media</h3>
-              <div className="flex gap-3">
-                {["GitHub", "LinkedIn", "Instagram"].map((social) => (
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { label: "GitHub", href: "https://github.com/sutzaku" },
+                  { label: "Instagram", href: "https://instagram.com/afiqriramdhn" },
+                  { label: "LinkedIn", href: "https://www.linkedin.com/in/muh-afiqri-ramadhan-22a844359/" },
+                ].map((social) => (
                   <a
-                    key={social}
-                    href="#"
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="px-4 py-2 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-400 text-sm hover:text-white hover:border-indigo-500/30 transition-all duration-300"
                   >
-                    {social}
+                    {social.label}
                   </a>
                 ))}
               </div>

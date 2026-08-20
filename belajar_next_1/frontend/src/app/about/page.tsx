@@ -37,8 +37,8 @@ export default function AboutPage() {
               {[
                 { label: "Nama", value: "Muh Afiqri Rhamadan" },
                 { label: "Kelas", value: "XII RPL 1" },
-                { label: "Sekolah", value: "SMK TELKOM MAKASSAR" },
-                { label: "Lokasi", value: "Indonesia" },
+                { label: "Sekolah", value: "SMK Telkom Makassar" },
+                { label: "Lokasi", value: "Makassar, Indonesia" },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -61,10 +61,9 @@ export default function AboutPage() {
               </h2>
               <p className="text-gray-400 leading-relaxed">
                 Saya adalah siswa kelas XII jurusan Rekayasa Perangkat Lunak
-                (RPL) yang memiliki passion besar di bidang web development.
-                Saya senang membangun website dan aplikasi web yang tidak
-                hanya fungsional, tetapi juga memiliki tampilan yang menarik
-                dan pengalaman pengguna yang baik.
+                (RPL) di SMK Telkom Makassar yang memiliki passion besar di bidang
+                full-stack web development. Saya berfokus menciptakan solusi web yang modern,
+                fungsional, dan memberikan pengalaman pengguna terbaik.
               </p>
             </div>
 
@@ -73,11 +72,9 @@ export default function AboutPage() {
                 Perjalanan Saya
               </h2>
               <p className="text-gray-400 leading-relaxed">
-                Perjalanan saya di dunia programming dimulai sejak kelas X
-                ketika pertama kali belajar HTML dan CSS. Sejak saat itu,
-                saya terus mengeksplorasi berbagai teknologi mulai dari
-                JavaScript, React, Next.js hingga backend dengan Express.js
-                dan database MySQL.
+                Perjalanan saya di dunia pemrograman dimulai dari ketertarikan pada dasar web di kelas X.
+                Seiring berjalannya waktu, saya mendalami ekosistem JavaScript modern seperti
+                React.js, Next.js (App Router), TypeScript, hingga backend Express.js dan arsitektur database MySQL/PostgreSQL.
               </p>
             </div>
 
@@ -86,10 +83,9 @@ export default function AboutPage() {
                 Tujuan Saya
               </h2>
               <p className="text-gray-400 leading-relaxed">
-                Saya ingin terus berkembang menjadi full-stack web developer
-                yang handal. Melalui portofolio ini, saya ingin menunjukkan
-                hasil kerja dan kemampuan yang telah saya bangun selama
-                belajar di jurusan RPL.
+                Saya bercita-cita menjadi seorang Full-Stack Software Engineer profesional yang mampu membangun
+                aplikasi berskala besar dan bermanfaat bagi masyarakat. Portofolio ini merangkum
+                pencapaian, kemampuan, dan proyek yang telah saya kembangkan.
               </p>
             </div>
           </div>
@@ -107,14 +103,14 @@ export default function AboutPage() {
               <div className="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-indigo-500 border-4 border-gray-950" />
               <div className="p-5 rounded-xl bg-gray-900/50 border border-gray-800/50">
                 <span className="text-xs text-indigo-400 font-medium">
-                  2024 — Sekarang
+                  2023 — Sekarang
                 </span>
                 <h3 className="text-white font-semibold mt-1">
-                  SMK ... — XII RPL 1
+                  SMK Telkom Makassar — XII RPL 1
                 </h3>
                 <p className="text-gray-400 text-sm mt-1">
-                  Mempelajari pemrograman web, mobile, dan desktop. Fokus
-                  pada pengembangan fullstack web application.
+                  Menempuh pendidikan di Jurusan Rekayasa Perangkat Lunak (RPL). Mempelajari
+                  pengembangan web fullstack, aplikasi mobile, arsitektur database, dan prinsip rekayasa perangkat lunak.
                 </p>
               </div>
             </div>
@@ -124,12 +120,11 @@ export default function AboutPage() {
               <div className="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-gray-700 border-4 border-gray-950" />
               <div className="p-5 rounded-xl bg-gray-900/50 border border-gray-800/50">
                 <span className="text-xs text-gray-500 font-medium">
-                  2021 — 2024
+                  2020 — 2023
                 </span>
-                <h3 className="text-white font-semibold mt-1">SMP ...</h3>
+                <h3 className="text-white font-semibold mt-1">SMP Telkom Makassar</h3>
                 <p className="text-gray-400 text-sm mt-1">
-                  Masa SMP dimana mulai tertarik dengan dunia teknologi dan
-                  komputer.
+                  Awal mula mengenal dan tertarik dengan dunia teknologi informasi, komputer, serta logika pemrograman dasar.
                 </p>
               </div>
             </div>

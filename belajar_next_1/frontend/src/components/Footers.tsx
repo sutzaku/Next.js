@@ -4,13 +4,16 @@ const quickLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/portfolio", label: "Portfolio" },
+  { href: "/skills", label: "Skills" },
+  { href: "/certificates", label: "Certificates" },
+  { href: "/testimonials", label: "Testimonials" },
   { href: "/contact", label: "Contact" },
 ];
 
 const socialLinks = [
-  { href: "#", label: "GitHub" },
-  { href: "#", label: "LinkedIn" },
-  { href: "#", label: "Instagram" },
+  { href: "https://github.com/sutzaku", label: "GitHub" },
+  { href: "https://instagram.com/afiqriramdhn", label: "Instagram" },
+  { href: "https://www.linkedin.com/in/muh-afiqri-ramadhan-22a844359/", label: "LinkedIn" },
 ];
 
 export default function Footer() {
